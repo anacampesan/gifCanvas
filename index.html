@@ -1,0 +1,51 @@
+<html>
+    <head></head>
+
+    <body>
+        <canvas id="canvas" width="500" height="500"></canvas>
+
+        <script>
+            const gif = [
+                {
+                    src: '1.gif',
+                    time: 2
+                },
+                {
+                    src: '2.gif',
+                    time: 1
+                },
+                {
+                    src: '3.gif',
+                    time: 1
+                },
+                {
+                    src: '4.gif',
+                    time: 1
+                },
+                {
+                    src: '5.gif',
+                    time: 1
+                }
+            ];
+
+            let canvas = document.getElementById('canvas');
+            let ctx = canvas.getContext('2d');
+            function renderCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(image, 0, 0);
+            }
+
+            let image = new Image();
+            let interval, index = 0;
+            // document.body.appendChild(image); // uncomment to see the image preview
+
+            (function reloadImg() {
+                image.src = gif[index].src;
+                interval = gif[index].time * 100;
+                index = (index === gif.length-1) ? 0 : index + 1;
+                renderCanvas();
+                setTimeout(reloadImg, interval);
+            })();
+        </script>
+    </body>
+</html>
